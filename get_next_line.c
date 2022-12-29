@@ -1,5 +1,5 @@
 #include "get_next_line.h"
-
+//utils
 char	*ft_strchr(const char *s, int c)
 {
 	unsigned char	*src;
