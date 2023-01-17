@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ejankovs <ejankovs@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/21 10:24:01 by ejankovs          #+#    #+#             */
+/*   Updated: 2023/01/17 17:41:10 by ejankovs         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 
 char	*ft_strchr(const char *s, int c)
@@ -28,10 +40,10 @@ char	*ft_get_line(char **s)
 	if ((*s)[len] == '\n')
 	{
 		line = (char *)malloc(sizeof(char) * len + 2);
-		if (!line)
+		tmp = ft_strdup(*s + len + 1);
+		if (!line || !tmp)
 			return (NULL);
 		ft_strncpy(line, *s, len + 1);
-		tmp = ft_strdup(*s + len + 1);
 		free(*s);
 		*s = tmp;
 		if (**s == '\0')
@@ -69,9 +81,9 @@ char	*get_next_line(int fd)
 	int			size;
 	char		*line;
 
-	if (fd < 0)
-		return (NULL);
 	buf = ft_alloc();
+	if (fd < 0 || !buf)
+		return (free(buf), NULL);
 	size = read(fd, buf, BUFFER_SIZE);
 	while (size > 0)
 	{
@@ -84,7 +96,7 @@ char	*get_next_line(int fd)
 			free(s[fd]);
 			s[fd] = line;
 		}
-		if (ft_strchr(s[fd], '\n'))
+		if (ft_strchr(s[fd], '\n') || s[fd] == NULL)
 			break ;
 		size = read(fd, buf, BUFFER_SIZE);
 	}

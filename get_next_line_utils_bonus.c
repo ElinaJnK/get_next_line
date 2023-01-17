@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ejankovs <ejankovs@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/21 10:23:50 by ejankovs          #+#    #+#             */
+/*   Updated: 2023/01/16 16:50:56 by ejankovs         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line_bonus.h"
 
 int	ft_strlen(const char *str)
@@ -23,6 +35,8 @@ char	*ft_strdup(char *src)
 
 	i = 0;
 	cpy = (char *) malloc(sizeof(char) * (ft_strlen(src) + 1));
+	if (!cpy)
+		return (NULL);
 	while (src[i])
 	{
 		cpy[i] = src[i];
